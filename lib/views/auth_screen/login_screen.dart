@@ -3,7 +3,6 @@ import 'package:bonsai_seller/views/home_screen/home.dart';
 import 'package:bonsai_seller/views/widgets/button.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_utils/get_utils.dart';
 
 import '../../const/images.dart';
 import '../widgets/text_style.dart';
@@ -36,8 +35,14 @@ class LoginScreen extends StatelessWidget {
                 60.heightBox,
                 Column(
                   children: [
+
+                    normalText(text: loginHint,size: 18.0,color: green),
+                    10.heightBox,
+
                     TextFormField(
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Vx.green100,
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.email,color: green,),
                         hintText: emailHint,
@@ -46,6 +51,8 @@ class LoginScreen extends StatelessWidget {
                     10.heightBox,
                     TextFormField(
                       decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Vx.green100,
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.lock,color: green,),
                         hintText: passwordHint,

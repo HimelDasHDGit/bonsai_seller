@@ -9,4 +9,5 @@ const profile = "assets/icons/profile.png";
 const shopSetting = "assets/icons/shop_setting.png";
 const star = "assets/icons/star.png";
 const verify = "assets/icons/verify.png";
-const product = "assets/icons/product.jpg";
+const product = "assets/product.jpg";
+const total = "assets/icons/total_sale.png";
