@@ -46,7 +46,13 @@ class OrdersScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    boldText(text: "465465464641",color: green,),
+                    Row(
+                      children: [
+                        CircleAvatar(child: Text("$index"),backgroundColor: green,radius: 15,),
+                        5.widthBox,
+                        boldText(text: "46B-41",color: green,),
+                      ],
+                    ),
                     Row(
                       children: [
                         normalText(text: "\$699.00",color: golden),

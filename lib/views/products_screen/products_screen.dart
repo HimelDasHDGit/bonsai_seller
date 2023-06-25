@@ -20,11 +20,40 @@ class ProductsScreen extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
-            children:List.generate(20, (index) => ListTile(
-              onTap:(){},
-              leading: Image.asset(product,width: 100,height: 100,fit: BoxFit.cover,),
-              title: boldText(text: "Product name",color: green,),
-              subtitle: normalText(text: "\$699.00",color: golden),
+            children:List.generate(20, (index) => Card(
+              child: ListTile(
+                onTap:(){},
+                leading: Image.asset(product,width: 100,height: 100,fit: BoxFit.cover,),
+                title: boldText(text: "Product name",color: green,),
+                subtitle: normalText(text: "\$699.00",color: golden),
+                trailing: VxPopupMenu(
+                    menuBuilder: (){
+                      return Column(
+                        children: List.generate(
+                        popupMenuItems.length,
+                          (index) {
+                          return Column(
+                            children: [
+                              const Divider(color: green,thickness: 1,endIndent: 10,indent: 10,),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Row(
+                                  children: [
+                                    Icon(popupMenuIcons[index],color: green,),
+                                    5.widthBox,
+                                    normalText(text: popupMenuItems[index],color: green),
+                                  ],
+                                ).onTap(() {}),
+                              ),
+                            ],
+                          );
+                        }),
+                      ).box.white.width(200).rounded.make();
+                    },
+                    clickType: VxClickType.singleClick,
+                    child: Icon(Icons.more_vert_rounded,size: 25,color: green,),
+                ),
+              ),
             ),),
           ),
         ),

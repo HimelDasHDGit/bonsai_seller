@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
 
     var bottomNavBar = [
       const BottomNavigationBarItem(
-        icon: Icon(Icons.home,size: 20,),
+        icon: Icon(Icons.home,size: 20,color: green,),
         label: dashboard,
       ),
       BottomNavigationBarItem(
