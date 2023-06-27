@@ -1,10 +1,11 @@
 import 'package:bonsai_seller/const/const.dart';
+import 'package:bonsai_seller/controllers/auth_controller.dart';
 import 'package:bonsai_seller/views/home_screen/home.dart';
 import 'package:bonsai_seller/views/widgets/button.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 
 import '../../const/images.dart';
+import '../widgets/loading_indicator.dart';
 import '../widgets/text_style.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,6 +13,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.put(AuthController());
+
+
+
     return  Scaffold(
       backgroundColor: green,
       body: SingleChildScrollView(
@@ -33,49 +39,64 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
                 60.heightBox,
-                Column(
-                  children: [
+                Obx(
+                    ()=> Column(
+                    children: [
 
-                    normalText(text: loginHint,size: 18.0,color: green),
-                    10.heightBox,
+                      normalText(text: loginHint,size: 18.0,color: green),
+                      10.heightBox,
 
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Vx.green100,
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.email,color: green,),
-                        hintText: emailHint,
+                      TextFormField(
+                        controller: controller.emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Vx.green100,
+                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.email,color: green,),
+                          hintText: emailHint,
+                        ),
                       ),
-                    ),
-                    10.heightBox,
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Vx.green100,
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.lock,color: green,),
-                        hintText: passwordHint,
+                      10.heightBox,
+                      TextFormField(
+                        obscureText: controller.isObscured.value,
+                        controller: controller.passwordController,
+                        decoration:  InputDecoration(
+                          filled: true,
+                          fillColor: Vx.green100,
+                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.lock,color: green,),
+                          hintText: passwordHint,
+                        ),
                       ),
-                    ),
-                    TextButton(onPressed: (){}, child:
-                    Align(
-                      child: normalText(text: forgotPassword,color: green),
-                    )
-                    ),
-                    30.heightBox,
-                    SizedBox(
-                      width: context.screenWidth-100,
-                      child: button(
-                        onPress: (){
-                          Get.to(()=> Home());
-                        },
-                        title: login,
-                        size: 16.0,
+                      TextButton(onPressed: (){}, child:
+                      Align(
+                        child: normalText(text: forgotPassword,color: green),
+                      )
                       ),
-                    ),
-                  ],
-                ).box.white.rounded.shadowMd.padding(const EdgeInsets.all(8)).make(),
+                      30.heightBox,
+                      SizedBox(
+                        width: context.screenWidth-100,
+                        child: controller.isLoading.value ? loadingIndicator():button(
+                          onPress: ()async {
+                            controller.isLoading(true);
+                            await controller.loginMethod(context: context).then((value) {
+                              if (value != null) {
+                                VxToast.show(context, msg: loggedIn,textColor: green,showTime: 5000);
+                                controller.isLoading(false);
+                                Get.offAll(()=> const Home());
+                              }  else{
+                                controller.isLoading(false);
+                            }
+                            });
+                          },
+                          title: login,
+                          size: 16.0,
+                        ),
+                      ),
+                    ],
+                  ).box.white.rounded.shadowMd.padding(const EdgeInsets.all(8)).make(),
+                ),
                 30.heightBox,
                 Center(child: normalText(text: anyProblem)),
                 100.heightBox,

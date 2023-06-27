@@ -19,7 +19,7 @@ const dashboard = "Dashboard", orders = "Orders", products = "Products",
     website = "Shop Website", shopMobileNumber = "+880 1754552486",shopAddress = "Shop Address",
     shopWebsite = "https//:bonsaiseller",shopName = "Shop Name",
 
-    logout = "Logout",totalSales = "Total sales",messages = "Messages", logOut = "Logout",
+    logout = "Logout",loggedIn = "Successfully logged in",totalSales = "Total sales",messages = "Messages", logOut = "Logout",
     popular_products = "Popular Products",unpaid = "Unpaid",chatscreen="Chat Screen";
 
 const featured = "Featured", edit = "Edit", delete = "Delete", save = "Save";

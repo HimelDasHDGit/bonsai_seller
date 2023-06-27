@@ -1,6 +1,8 @@
 import 'package:bonsai_seller/const/const.dart';
+import 'package:bonsai_seller/views/orders_screen/order_details.dart';
 import 'package:bonsai_seller/views/widgets/appbar.dart';
 import 'package:bonsai_seller/views/widgets/text_style.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart' as intl;
 
 
@@ -17,7 +19,9 @@ class OrdersScreen extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children:List.generate(20, (index) => ListTile(
-              onTap:(){},
+              onTap:(){
+                Get.to(()=> const OrderDetails());
+              },
               tileColor: Vx.green200,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
               title: Column(
@@ -48,7 +52,7 @@ class OrdersScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        CircleAvatar(child: Text("$index"),backgroundColor: green,radius: 15,),
+                        CircleAvatar(backgroundColor: green,radius: 15,child: Text("$index"),),
                         5.widthBox,
                         boldText(text: "46B-41",color: green,),
                       ],

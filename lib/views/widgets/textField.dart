@@ -26,3 +26,30 @@ Widget textField({lebel, hint, controller}){
     ),
   );
 }
+
+Widget addTextField({lebel, hint, controller}){
+  return Padding(
+    padding: const EdgeInsets.only(left: 10,right: 10),
+    child: TextFormField(
+      cursorColor: white,
+      decoration: InputDecoration(
+        isDense: true,
+        label: normalText(text: lebel,color: white),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(
+            color: white,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(
+            color: white,
+          ),
+        ),
+        hintText: hint,
+        hintStyle: TextStyle(color: white),
+      ),
+    ),
+  );
+}
