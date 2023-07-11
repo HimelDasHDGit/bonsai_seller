@@ -1,10 +1,12 @@
 import 'package:bonsai_seller/const/const.dart';
-import 'package:bonsai_seller/const/images.dart';
 import 'package:bonsai_seller/views/widgets/text_style.dart';
 import 'package:get/get.dart';
 
 class ProductsDetails extends StatelessWidget {
-  const ProductsDetails({Key? key}) : super(key: key);
+
+  final dynamic data;
+
+  const ProductsDetails({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class ProductsDetails extends StatelessWidget {
               color: green,
             )),
         title: boldText(
-          text: "Product details",
+          text: "${data['name']}",
           color: green,
           size: 16.0,
         ),
@@ -39,12 +41,12 @@ class ProductsDetails extends StatelessWidget {
                   pauseAutoPlayOnTouch: const Duration(seconds: 15),
                   autoPlayAnimationDuration: const Duration(seconds: 2),
                   autoPlayCurve: Curves.linear,
-                  itemCount: 5,
+                  itemCount: 3,
                   itemBuilder: (context, index) {
-                    return Image.asset(
-                      product,
-                      // data['images'][index],
+                    return Image.network(
+                      "${data['images'][index]}",
                       width: double.infinity,
+                      height: double.infinity,
                       fit: BoxFit.cover,
                     );
                   }),
@@ -54,22 +56,21 @@ class ProductsDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     boldText(
-                        text: "Product title", size: 16.0, color: Colors.black),
+                        text: "${data['name']}", size: 16.0, color: Colors.black),
                     10.heightBox,
                     Row(
                       children: [
                         boldText(
-                            text: "Category", size: 16.0, color: Colors.black),
+                            text: "${data['category']}", size: 16.0, color: Colors.black),
                         10.widthBox,
                         normalText(
-                            text: "Subcategory", color: green, size: 10.0),
+                            text: "${data['subCategory']}", color: green, size: 10.0),
                       ],
                     ),
                     10.heightBox,
                     VxRating(
                       isSelectable: false,
-                      // value: double.parse(data['rating']),
-                      value: 3.0,
+                      value: double.parse(data['rating']),
                       onRatingUpdate: (value) {},
                       normalColor: textfieldGrey,
                       selectionColor: golden,
@@ -83,7 +84,7 @@ class ProductsDetails extends StatelessWidget {
               10.heightBox,
               Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: "৳5200/-".text.size(18.0).make(),
+                child: "${data['price']}/-".text.size(18.0).make(),
               ),
               10.heightBox,
               20.heightBox,
@@ -125,9 +126,9 @@ class ProductsDetails extends StatelessWidget {
                           width: 100,
                           child: "Quantity:".text.color(green).bold.make(),
                         ),
-                        const Text(
-                          "10 items",
-                          style: TextStyle(color: green, fontSize: 16.0),
+                         Text(
+                          "${data['quantity']} items",
+                          style: const TextStyle(color: green, fontSize: 16.0),
                         ),
                       ],
                     ),
@@ -140,11 +141,8 @@ class ProductsDetails extends StatelessWidget {
               boldText(text: "Description", color: green),
               const Divider(),
               10.heightBox,
-              // "${data['description']}".text.color(darkFontGrey).make(),
               normalText(
-                  text:
-                      "500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles 500 miles"
-                      "500 miles 500 miles 500 miles 500 miles 500 miles 500 miles500 miles 500 miles 500 miles 500 miles 500 miles 500 miles",
+                  text: "${data['description']}",
                   color: green),
               20.heightBox,
             ],

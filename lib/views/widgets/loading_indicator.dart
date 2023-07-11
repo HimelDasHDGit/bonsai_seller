@@ -1,9 +1,9 @@
 import 'package:bonsai_seller/const/const.dart';
 
-Widget loadingIndicator(){
+Widget loadingIndicator({color = green}) {
   return Center(
-    child: const CircularProgressIndicator(
-      valueColor: AlwaysStoppedAnimation(green),
+    child: CircularProgressIndicator(
+      valueColor: AlwaysStoppedAnimation(color),
     ),
   );
 }

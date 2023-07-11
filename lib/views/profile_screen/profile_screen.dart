@@ -1,4 +1,5 @@
 import 'package:bonsai_seller/const/const.dart';
+import 'package:bonsai_seller/const/images.dart';
 import 'package:bonsai_seller/controllers/auth_controller.dart';
 import 'package:bonsai_seller/controllers/profile_controller.dart';
 import 'package:bonsai_seller/services/bonsai_server.dart';
@@ -25,7 +26,9 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(() => const EditProfileScreen());
+              Get.to(() => EditProfileScreen(
+                    username: controller.sellerData['name'],
+                  ));
             },
             icon: const Icon(
               Icons.edit,
@@ -49,14 +52,23 @@ class ProfileScreen extends StatelessWidget {
               return loadingIndicator();
             } else {
               controller.sellerData = snapshot.data!.docs[0];
-
               return Column(
                 children: [
                   ListTile(
-                    leading: Image.network(
-                      "${controller.sellerData['imageUrl']}",
-                      fit: BoxFit.cover,
-                    ).box.roundedFull.clip(Clip.antiAlias).make(),
+                    isThreeLine: true,
+                    leading: controller.sellerData['imageUrl'] == ''
+                        ? Image.asset(
+                            product,
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ).box.roundedFull.clip(Clip.antiAlias).make()
+                        : Image.network(
+                            "${controller.sellerData['imageUrl']}",
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ).box.roundedFull.clip(Clip.antiAlias).make(),
                     title: boldText(
                         text: "${controller.sellerData['name']}", color: green),
                     subtitle: normalText(
